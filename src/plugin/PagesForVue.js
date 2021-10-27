@@ -6,28 +6,21 @@ export default {
         Vue.mixin({
             data() {
                 return {
-                    currentPageNumber: 0
-                }
-            },
-
-            created(){
-                this.paginator;
-
-            },
-            watch:{
-                currentPageNumber(newPageNumber, oldPageNumber){
-                    //Runs when currentPageNumber is updated
+                    paginator: "",
+                    currentPageNumber: 1
                 }
             },
             methods: {
-                createPaginator(objectList, objectsPerPage, startPageNumber){
+                createPaginator : function(objectList, objectsPerPage, startPageNumber){
                     this.paginator = new Paginator(objectList, objectsPerPage);
                     this.currentPageNumber = startPageNumber;
                 },
-                setPage(pageNumber){
+                updatePaginator : function(objectList, objectsPerPage){
+                    this.paginator = new Paginator(objectList, objectsPerPage);
+                },
+                setPage : function(pageNumber){
                     this.currentPageNumber = pageNumber;
                 }
-
             },
             computed: {
                 page(){
