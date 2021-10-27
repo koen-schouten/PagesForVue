@@ -5,6 +5,10 @@ export default class Page{
         this.pageNumber = pageNumber;
     }
 
+    getObjectList(){
+        return this.objectList
+    }
+
     hasNext(){
         // the !! converts the number into a boolean
         return !!this.paginator._nextPage(this.pageNumber);
