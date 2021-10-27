@@ -23,11 +23,15 @@ export default {
                 createPaginator(objectList, objectsPerPage, startPageNumber){
                     this.paginator = new Paginator(objectList, objectsPerPage);
                     this.currentPageNumber = startPageNumber;
+                },
+                setPage(pageNumber){
+                    this.currentPageNumber = pageNumber;
                 }
+
             },
             computed: {
                 page(){
-                    return this.paginator.getPage(currentPageNumber);
+                    return this.paginator.getPage(this.currentPageNumber).getObjectList();
                 }
             }
 
