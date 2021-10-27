@@ -32,7 +32,7 @@ export default class Paginator{
     }
 
     getPage(number){
-        return this.pages[number + 1];
+        return this.pages[number - 1];
     }
 
     pageRange(){
