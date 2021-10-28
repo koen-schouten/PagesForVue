@@ -14,7 +14,7 @@ export default {
                 setPaginator : function(objectList, objectsPerPage){
                     this.paginator = new Paginator(objectList, objectsPerPage);
                 },
-                setPage : function(pageNumber){
+                gotoPage : function(pageNumber){
                     this.currentPageNumber = pageNumber;
                 }
             },
