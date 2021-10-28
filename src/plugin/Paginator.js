@@ -40,7 +40,9 @@ export default class Paginator{
     }
 
     getElidedPageRange(number, symbol="...", onEachSide=3, onEnds=2){
-        let pageRange = this.pageRange().map(element => element.toString());
+        let pageRange = this.pageRange().map(el => {
+            return {"type": "pageNumber", "value": el}
+        });
         let elidedPageRange = []
 
         if(parseInt(number) > pageRange.length){
@@ -51,24 +53,24 @@ export default class Paginator{
         let pagesLeftOfNumber = pageRange.slice(0,number - 1);
         let pagesRightOfNumber = pageRange.slice(number);
 
-        if(pagesLeftOfNumber <= onEachSide + onEnds){
+        if(pagesLeftOfNumber.length <= onEachSide + onEnds){
             elidedPageRange = elidedPageRange.concat(pagesLeftOfNumber); 
         }else{
             elidedPageRange = elidedPageRange.concat(pagesLeftOfNumber.slice(0, onEnds));
-            elidedPageRange = elidedPageRange.concat([symbol]);
+            elidedPageRange = elidedPageRange.concat([{"type": "ellipsis", "value": symbol}]);
             elidedPageRange = elidedPageRange.concat(pagesLeftOfNumber.slice(pagesLeftOfNumber.length - onEachSide))
         }
 
         elidedPageRange = elidedPageRange.concat(numberPage)
 
-        if(pagesRightOfNumber <= onEachSide + onEnds){
+        if(pagesRightOfNumber.length <= onEachSide + onEnds){
             elidedPageRange = elidedPageRange.concat(pagesRightOfNumber); 
         }else{
             elidedPageRange = elidedPageRange.concat(pagesRightOfNumber.slice(0, onEachSide));
-            elidedPageRange = elidedPageRange.concat([symbol]);
-            elidedPageRange = elidedPageRange.concat(pagesLeftOfNumber.slice(pagesLeftOfNumber.length - onEnds))
+            elidedPageRange = elidedPageRange.concat([{"type": "ellipsis", "value": symbol}]);
+            elidedPageRange = elidedPageRange.concat(pagesRightOfNumber.slice(pagesRightOfNumber.length - onEnds))
         }
-
+        
         return elidedPageRange;
     }
 
