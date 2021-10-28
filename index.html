@@ -17,8 +17,13 @@
             display: flex;
         }
 
+        #page-list li{
+            display:block;
+        }
+
         #page-list > li > a.active{
             color:white;
+            cursor: default;
             background-color: #4CAF50;
         }
 
@@ -87,8 +92,8 @@
             </ul>
             <ul id="page-list">
                 <li  v-for="item in elidedPageRange">
-                        <a v-if="item.type === 'ellipsis'">...</a>
-                        <a v-if="item.type === 'pageNumber'" v-bind:class="{ active: item.value == page.pageNumber }"  v-on:click="gotoPage(item.value)">{{ item.value }}</a>
+                        <a  v-if="item.type === 'ellipsis'">...</a>
+                        <a  v-if="item.type === 'pageNumber'" v-bind:class="{ active: item.value == page.pageNumber }"  v-on:click="gotoPage(item.value)">{{ item.value }}</a>
                 </li>
             </ul>
             `,
