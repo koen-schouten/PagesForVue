@@ -51,6 +51,7 @@
     
 
         const paginationComponent = {
+            mixins: [Paginator],
             props: ['items'],
             template: `
             <ul id="test">
@@ -76,6 +77,7 @@
         }
 
         const paginationComponent2 = {
+            mixins: [Paginator],
             props: ['items'],
             template: `
             <ul id="test">
@@ -116,7 +118,6 @@
 
         });
 
-        app.use(Paginator);
         const vm = app.mount('#pages');
 
         document.getElementById("removeItem").addEventListener("click", function(){
