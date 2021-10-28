@@ -31,7 +31,7 @@ export default {
                 }
                 ,
                 elidedPageRange() {
-                    if (this.paginator.pageCount() > 0) {
+                    if (this.paginator.pageCount() > 0 && this.paginator.pageExists(this.currentPageNumber)) {
                         return this.paginator.getElidedPageRange(this.currentPageNumber,
                             this.elidedPageRangeProps.symbol,
                             this.elidedPageRangeProps.onEachSide,

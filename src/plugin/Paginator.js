@@ -31,6 +31,10 @@ export default class Paginator{
         return this.pages.length;
     }
 
+    pageExists(number){
+        return this.pages.length >= number;
+    }
+
     getPage(number){
         return this.pages[number - 1];
     }
