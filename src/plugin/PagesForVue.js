@@ -36,9 +36,9 @@ export default {
                 elidedPageRange() {
                     if (this.paginator.pageCount() > 0 && this.paginator.pageExists(this.currentPageNumber)) {
                         return this.paginator.getElidedPageRange(this.currentPageNumber,
-                            this.elidedPageRangeProps.symbol,
-                            this.elidedPageRangeProps.onEachSide,
-                            this.elidedPageRangeProps.onEnds
+                            this.elidedPageRangeProperties.symbol,
+                            this.elidedPageRangeProperties.onEachSide,
+                            this.elidedPageRangeProperties.onEnds
                         );
                     } else {
                         return [];
