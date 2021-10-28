@@ -1,12 +1,12 @@
 export default class Page{
-    constructor(objectList, paginator, pageNumber){
-        this.objectList = objectList;
+    constructor(pageItems, paginator, pageNumber){
+        this.pageItems = pageItems;
         this.paginator = paginator;
         this.pageNumber = pageNumber;
     }
 
-    getObjectList(){
-        return this.objectList
+    getPageItems(){
+        return this.pageItems
     }
 
     hasNext(){
