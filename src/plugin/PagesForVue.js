@@ -5,7 +5,7 @@ export default {
         Vue.mixin({
             data() {
                 return {
-                    elidedPageRangeProps: {
+                    elidedPageRangeProperties: {
                         symbol: "…",
                         onEachSide: 3,
                         onEnds: 2,
@@ -20,6 +20,9 @@ export default {
                 },
                 gotoPage: function (pageNumber) {
                     this.currentPageNumber = pageNumber;
+                },
+                setElidedPageRangeProperties: function(props){
+                    this.elidedPageRangeProperties = props;
                 }
             },
             computed: {
