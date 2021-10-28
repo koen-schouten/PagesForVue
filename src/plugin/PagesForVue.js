@@ -11,11 +11,7 @@ export default {
                 }
             },
             methods: {
-                createPaginator : function(objectList, objectsPerPage, startPageNumber){
-                    this.paginator = new Paginator(objectList, objectsPerPage);
-                    this.currentPageNumber = startPageNumber;
-                },
-                updatePaginator : function(objectList, objectsPerPage){
+                setPaginator : function(objectList, objectsPerPage){
                     this.paginator = new Paginator(objectList, objectsPerPage);
                 },
                 setPage : function(pageNumber){
