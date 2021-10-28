@@ -6,7 +6,7 @@ export default {
             data() {
                 return {
                     elidedPageRangeProps: {
-                        symbol: "...",
+                        symbol: "…",
                         onEachSide: 3,
                         onEnds: 2,
                     },
@@ -27,7 +27,7 @@ export default {
                     if (this.paginator.pageCount() > 0) {
                         return this.paginator.getPage(this.currentPageNumber);
                     }
-                    return [];
+                    return null;
                 }
                 ,
                 elidedPageRange() {
