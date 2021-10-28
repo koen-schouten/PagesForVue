@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+<head>
+    <title></title>
+    <meta name="description" content="Our first page">
+    <meta name="keywords" content="html tutorial template">
+    <script type="module">
+        import Paginator from "./src/plugin/Paginator.js";
+        window.Paginator = Paginator;
+        let paginator = new Paginator([1,2,3,4,5,6,7], 2)
+    </script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        #page-list{
+            list-style: none;
+            display: flex;
+        }
+
+        #page-list > li > a.active{
+            color:white;
+            background-color: #4CAF50;
+        }
+
+        #page-list > li > a{
+            align-items: center;
+            display: flex;
+            margin: 2px;
+            padding: 8px;
+        }
+
+        #page-list > li > a:hover:not(a.active){
+            cursor: pointer;
+            background-color: gray;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="pages">
+    </div>
+    <button id="removeItem">remove first item</button>
+</body>
+
+
+    <script type="module">
+        import Paginator from "./src/plugin/PagesForVue.js";
+        let exampleItems = [...Array(1500).keys()].map(i => ({ id: (i+1), name: 'Item ' + (i+1) }));
+    
+
+        const paginationComponent = {
+            props: ['items'],
+            template: `
+            <ul id="test">
+                <li v-if="page" v-for="item in page.pageItems">
+                    {{ item.name }}
+                </li>
+            </ul>
+            <ul id="page-list">
+                <li  v-for="item in elidedPageRange">
+                        <a v-if="item.type === 'ellipsis'">...</a>
+                        <a v-if="item.type === 'pageNumber'" v-bind:class="{ active: item.value == page.pageNumber }"  v-on:click="gotoPage(item.value)">{{ item.value }}</a>
+                </li>
+            </ul>
+            `,
+            created(){
+               this.setPaginator(this.items, 10);
+            },
+            watch:{
+                items : function(newExampleItems, oldExampleItems){
+                    this.setPaginator(newExampleItems, 10);
+                }
+            },
+        }
+
+        const paginationComponent2 = {
+            props: ['items'],
+            template: `
+            <ul id="test">
+                <li v-if="page" v-for="item in page.pageItems">
+                    {{ item.name }}
+                </li>
+            </ul>
+            <ul id="page-list">
+                <li  v-for="item in elidedPageRange">
+                        <a v-if="item.type === 'ellipsis'">...</a>
+                        <a v-if="item.type === 'pageNumber'" v-bind:class="{ active: item.value == page.pageNumber }"  v-on:click="gotoPage(item.value)">{{ item.value }}</a>
+                </li>
+            </ul>
+            `,
+            created(){
+               this.setPaginator(this.items, 20);
+            },
+            watch:{
+                items : function(newExampleItems, oldExampleItems){
+                    this.setPaginator(newExampleItems, 20);
+                }
+            },
+        }
+
+        const app = Vue.createApp({
+            data(){
+                return {
+                    items: exampleItems,
+                }
+            },
+            components: {
+                'paginationComponent': paginationComponent,
+                'paginationComponent2' : paginationComponent2
+            },
+            template:`<paginationComponent v-bind:items="items"></paginationComponent>
+            <paginationComponent2 v-bind:items="items"></paginationComponent2>`
+
+
+        });
+
+        app.use(Paginator);
+        const vm = app.mount('#pages');
+
+        document.getElementById("removeItem").addEventListener("click", function(){
+            exampleItems.shift();
+            vm.$data.items = [...exampleItems];
+        });
+    
+    </script>
+
+</html>
