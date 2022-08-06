@@ -1,21 +1,29 @@
 import Paginator from "./Paginator.js"
 
+
+const defaultElidedPageRangeProperties = {
+    symbol: "…",
+    onEachSide: 2,
+    onEnds: 2, 
+}
+const emptyPaginator = new Paginator([], 1)
+const startPageNumber = 1;
+
 export default {
     data() {
         return {
-            elidedPageRangeProperties: {
-                symbol: "…",
-                onEachSide: 3,
-                onEnds: 2,
-            },
-            paginator: new Paginator([], 1),
-            currentPageNumber: 1
+            elidedPageRangeProperties: defaultElidedPageRangeProperties,
+            //Set a defaut paginator & currentPageNumber
+            paginator: emptyPaginator,
+            currentPageNumber: startPageNumber
         }
     },
     methods: {
         setPaginator: function (objectList, objectsPerPage) {
             this.paginator = new Paginator(objectList, objectsPerPage);
         },
+        //Sets the currentPageNumber to pageNumber
+        // This updates the computed page object to the page belonging to pageNumber.
         gotoPage: function (pageNumber) {
             this.currentPageNumber = pageNumber;
         },
@@ -24,6 +32,7 @@ export default {
         }
     },
     computed: {
+        //Returns the page object of the current active page.
         page() {
             if (this.paginator.pageCount() > 0) {
                 return this.paginator.getPage(this.currentPageNumber);
