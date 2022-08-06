@@ -43,25 +43,25 @@ export default class Paginator{
         return Array.from({length: this.pages.length}, (_, i) => i + 1)
     }
 
-    getElidedPageRange(number, symbol="...", onEachSide=3, onEnds=2){
+    getElidedPageRange(pageNumber, elisionSymbol="...", onEachSide=3, onEnds=2){
         let pageRange = this.pageRange().map(el => {
-            return {"type": "pageNumber", "value": el}
+            return {"type": "pageNumber", "pageNumber": el}
         });
         let elidedPageRange = []
 
-        if(parseInt(number) > pageRange.length){
+        if(parseInt(pageNumber) > pageRange.length){
             throw new Error('PageNumber is not valid.');
         }
 
-        let numberPage = [pageRange[number - 1]];
-        let pagesLeftOfNumber = pageRange.slice(0,number - 1);
-        let pagesRightOfNumber = pageRange.slice(number);
+        let numberPage = [pageRange[pageNumber - 1]];
+        let pagesLeftOfNumber = pageRange.slice(0,pageNumber - 1);
+        let pagesRightOfNumber = pageRange.slice(pageNumber);
 
         if(pagesLeftOfNumber.length <= onEachSide + onEnds){
             elidedPageRange = elidedPageRange.concat(pagesLeftOfNumber); 
         }else{
             elidedPageRange = elidedPageRange.concat(pagesLeftOfNumber.slice(0, onEnds));
-            elidedPageRange = elidedPageRange.concat([{"type": "ellipsis", "value": symbol}]);
+            elidedPageRange = elidedPageRange.concat([{"type": "ellipsis", "pageNumber": elisionSymbol}]);
             elidedPageRange = elidedPageRange.concat(pagesLeftOfNumber.slice(pagesLeftOfNumber.length - onEachSide))
         }
 
@@ -71,7 +71,7 @@ export default class Paginator{
             elidedPageRange = elidedPageRange.concat(pagesRightOfNumber); 
         }else{
             elidedPageRange = elidedPageRange.concat(pagesRightOfNumber.slice(0, onEachSide));
-            elidedPageRange = elidedPageRange.concat([{"type": "ellipsis", "value": symbol}]);
+            elidedPageRange = elidedPageRange.concat([{"type": "ellipsis", "pageNumber": elisionSymbol}]);
             elidedPageRange = elidedPageRange.concat(pagesRightOfNumber.slice(pagesRightOfNumber.length - onEnds))
         }
         
